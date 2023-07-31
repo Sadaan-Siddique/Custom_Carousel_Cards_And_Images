@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slides</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 35rem;
+            height: 30rem;
+            position: relative;
+            /* border: 2px solid red; */
+            margin: auto;
+        }
+
+        .container button {
+            border-radius: 40px;
+            padding: 10px;
+            border: none;
+            background-color: rgb(83, 83, 83);
+            color: white;
+            font-weight: bolder;
+            font-size: 15px;
+            cursor: pointer;
+            margin: 0px 3px;
+        }
+
+        .container button:hover {
+            box-shadow: 0px 0px 3px darkgray;
+            transition: all 0.3s;
+        }
+
+        .img_container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            /* border: 2px solid red; */
+        }
+
+        .img_container .img_slides {
+            box-sizing: border-box;
+            /* border: 3px solid green; */
+            position: absolute;
+            width: 100%;
+            transition: 1s;
+            text-align: center;
+            font-size: larger;
+        }
+
+        .img_container .img_slides img {
+            width: 100%;
+        }
+
+        .img_container .img_slides p {
+            font-weight: 700;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <button class="prev_btn">&lt;</button>
+        <div class="img_container">
+            <div class="img_slides">
+                <img src="https://picsum.photos/id/235/500/400" alt="img-1">
+                <p>Image 1 </p>
+            </div>
+            <div class="img_slides">
+                <img src="https://picsum.photos/id/236/500/400" alt="img-1">
+                <p>Image 2 </p>
+            </div>
+            <div class="img_slides">
+                <img src="https://picsum.photos/id/237/500/400" alt="img-3">
+                <p>Image 3 </p>
+            </div>
+            <div class="img_slides">
+                <img src="https://picsum.photos/id/238/500/400" alt="img-1">
+                <p>Image 4 </p>
+            </div>
+            <div class="img_slides">
+                <img src="https://picsum.photos/id/239/500/400" alt="img-1">
+                <p>Image 5 </p>
+            </div>
+            <div class="img_slides">
+                <img src="https://picsum.photos/id/240/500/400" alt="img-3">
+                <p>Image 6 </p>
+            </div>
+            <div class="img_slides">
+                <img src="https://picsum.photos/id/241/500/400" alt="img-1">
+                <p>Image 7 </p>
+            </div>
+            <div class="img_slides">
+                <img src="https://picsum.photos/id/242/500/400" alt="img-1">
+                <p>Image 8 </p>
+            </div>
+            <div class="img_slides">
+                <img src="https://picsum.photos/id/243/500/400" alt="img-3">
+                <p>Image 9 </p>
+            </div>
+            <div class="img_slides">
+                <img src="https://picsum.photos/id/244/500/400" alt="img-1">
+                <p>Image 10 </p>
+            </div>
+            <div class="img_slides">
+                <img src="https://picsum.photos/id/255/500/400" alt="img-1">
+                <p>Image 11 </p>
+            </div>
+            <div class="img_slides">
+                <img src="https://picsum.photos/id/256/500/400" alt="img-3">
+                <p>Image 12 </p>
+            </div>
+            <!-- <img class="img_slides" src="./Images/digital_marketing_Poster.jpg" alt="img-3">
+      <img class="img_slides" src="./Images/How_Google_Keeps_You_Safe_on_search.jpg" alt="img-3">
+      <img class="img_slides" src="./Images/how_goole_search_works.jpg" alt="img-3"> -->
+        </div>
+        <button class="next_btn">&gt;</button>
+    </div>
+    <!-- ... your existing HTML code ... -->
+
+    <script>
+        const images = document.querySelectorAll('.img_slides');
+        let slide_num = 0;
+
+        const imgSliding = () => {
+            images.forEach((slides, index) => {
+                slides.style.left = `${index * 100}% `;
+            })
+        };
+        imgSliding();
+
+        document.querySelector('.prev_btn').addEventListener('click', () => {
+            slide_num--;
+            if (slide_num < 0) {
+                slide_num = images.length - 1;
+            }
+            chngImgSlides();
+        });
+
+        document.querySelector('.next_btn').addEventListener('click', () => {
+            slide_num++;
+            if (slide_num >= images.length) {
+                slide_num = 0;
+            }
+            chngImgSlides();
+        });
+
+        const chngImgSlides = () => {
+            images.forEach((slides, index) => {
+                const newIndex = (index - slide_num + images.length) % images.length;
+                slides.style.transform = `translateX(${newIndex * 100}%)`;
+        //         slides.style.transform = `translateX(${-slide_num * 100}%)`;
+            });
+        };
+
+    </script>
+
+
+</body>
+
+</html>
